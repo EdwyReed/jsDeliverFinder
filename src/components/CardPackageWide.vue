@@ -41,6 +41,7 @@
     <div class="package-keywords row full-width items-center" v-if="npmPackage.package?.keywords">
       <q-chip
         v-for="keyword in npmPackage.package.keywords.slice(0, 3)"
+        :key="keyword"
         clickable
         color="grey-7"
         outline

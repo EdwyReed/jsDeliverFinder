@@ -93,6 +93,7 @@
         >
           <q-chip
             v-for="keyword in selectedPackage.package.keywords"
+            :key="keyword"
             v-close-popup
             clickable
             color="grey-7"
