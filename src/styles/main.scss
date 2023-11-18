@@ -1,0 +1,31 @@
+@import './base.scss';
+
+#app {
+  max-width: 100vw;
+
+  font-weight: normal;
+}
+
+.bg {
+  &-primary {
+    background-color: $primary !important;
+  }
+
+  &-primary-light {
+    background-color: $primary-light !important;
+  }
+}
+
+.text {
+  &-primary {
+    color: $primary !important;
+  }
+
+  &-secondary {
+    color: $secondary !important;
+  }
+
+  &-light {
+    color: $light !important;
+  }
+}
