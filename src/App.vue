@@ -14,10 +14,10 @@ import { RouterView } from 'vue-router'
     </q-page-container>
 
     <q-footer class="bg-primary row align-center">
-      <q-toolbar>
+      <q-toolbar style="flex-wrap: wrap;">
         <q-toolbar-title>Made by Ivan Petylo</q-toolbar-title>
         <q-btn
-            to="https://github.com/EdwyReed/jsDeliverFinder"
+            href="https://github.com/EdwyReed/jsDeliverFinder"
             borderless
             no-caps
             flat
