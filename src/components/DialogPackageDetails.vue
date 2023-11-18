@@ -48,6 +48,28 @@
       </q-btn-group>
 
       <q-card-section class="package-install-info column q-px-sm">
+        <template v-if="selectedPackage.package.maintainers">
+          <span class="q-pl-sm text-weight-bold">Maintainers:</span>
+          <div class="q-mb-md column q-gutter-sm">
+            <span
+              v-for="maintainer in selectedPackage.package.maintainers"
+              :key="maintainer.username"
+            >
+              •
+              <a
+                :href="`https://github.com/${maintainer?.username}`"
+                class="maintainer-username q-mr-sm"
+                target="_blank"
+              >
+                {{ maintainer?.username }}
+              </a>
+              <q-badge align="middle" color="orange-5" outline>
+                {{ maintainer?.email }}
+              </q-badge>
+            </span>
+          </div>
+        </template>
+
         <span class="q-pl-sm text-weight-bold">Description:</span>
         <span class="q-mb-md">{{ selectedPackage.package.description }}</span>
 
@@ -151,6 +173,14 @@ const computedNpmCommand = computed(() => {
 @import '@/styles/variables.scss';
 
 .package-details-modal {
+  .maintainer-username {
+    color: $primary;
+
+    &:hover {
+      color: $secondary;
+    }
+  }
+
   .package-install-info {
     .q-btn {
       .q-btn__content {
