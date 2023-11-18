@@ -5,17 +5,13 @@
         <q-toolbar-title class="full-width justify-between q-pa-none">
           <div class="column">
             <div class="row">
-                  <span class="text-weight-bold ellipsis-2-lines">
-                    {{ selectedPackage.package.name }}
-                  </span>
-              <q-chip color="blue-5" outline>
-                v. {{ selectedPackage.package.version }}
-              </q-chip>
+              <span class="text-weight-bold ellipsis-2-lines">
+                {{ selectedPackage.package.name }}
+              </span>
+              <q-chip color="blue-5" outline> v. {{ selectedPackage.package.version }}</q-chip>
             </div>
             <div v-if="!!selectedPackage.package?.author" class="row text-subtitle1">
-              <p class="q-my-none">
-                by {{ selectedPackage.package.author.name }}
-              </p>
+              <p class="q-my-none">by {{ selectedPackage.package.author.name }}</p>
             </div>
           </div>
         </q-toolbar-title>
@@ -23,31 +19,31 @@
 
       <q-btn-group class="q-mx-auto" spread rounded color="blue-9">
         <q-btn
-            :href="selectedPackage.package.links.npm"
-            target="_blank"
-            text-color="blue-9"
-            rounded
-            no-caps
-            icon-right="mdi-npm"
-            label="NPM"
+          :href="selectedPackage.package.links.npm"
+          icon-right="mdi-npm"
+          label="NPM"
+          no-caps
+          rounded
+          target="_blank"
+          text-color="blue-9"
         />
         <q-btn
-            :href="selectedPackage.package.links.repository"
-            target="_blank"
-            text-color="blue-9"
-            rounded
-            no-caps
-            icon-right="mdi-git"
-            label="GitHub"
+          :href="selectedPackage.package.links.repository"
+          icon-right="mdi-git"
+          label="GitHub"
+          no-caps
+          rounded
+          target="_blank"
+          text-color="blue-9"
         />
         <q-btn
-            :href="selectedPackage.package.links.homepage"
-            target="_blank"
-            text-color="blue-9"
-            rounded
-            no-caps
-            icon-right="mdi-home"
-            label="Homepage"
+          :href="selectedPackage.package.links.homepage"
+          icon-right="mdi-home"
+          label="Homepage"
+          no-caps
+          rounded
+          target="_blank"
+          text-color="blue-9"
         />
       </q-btn-group>
 
@@ -57,54 +53,51 @@
 
         <span class="q-pl-sm text-weight-bold">jsDelivr CDN link:</span>
         <q-btn
-            class="full-width q-mb-md"
-            no-caps
-            color="blue-7"
-            outline
-            icon-right="mdi-content-copy"
-            @click="copyToClipboard(computedDelivrCDNLink)"
+          class="full-width q-mb-md"
+          color="blue-7"
+          icon-right="mdi-content-copy"
+          no-caps
+          outline
+          @click="copyToClipboard(computedDelivrCDNLink)"
         >
-          {{
-            computedDelivrCDNLink
-          }}
+          {{ computedDelivrCDNLink }}
         </q-btn>
 
         <span class="q-pl-sm text-weight-bold">Yarn install:</span>
         <q-btn
-            class="full-width q-mb-md"
-            no-caps
-            color="blue-7"
-            outline
-            icon-right="mdi-content-copy"
-            @click="copyToClipboard(computedYarnCommand)"
+          class="full-width q-mb-md"
+          color="blue-7"
+          icon-right="mdi-content-copy"
+          no-caps
+          outline
+          @click="copyToClipboard(computedYarnCommand)"
         >
-          {{
-            computedYarnCommand
-          }}
+          {{ computedYarnCommand }}
         </q-btn>
 
         <span class="q-pl-sm text-weight-bold">NPM install:</span>
         <q-btn
-            class="full-width q-mb-md"
-            no-caps
-            color="blue-7"
-            outline
-            icon-right="mdi-content-copy"
-            @click="copyToClipboard(computedNpmCommand)"
+          class="full-width q-mb-md"
+          color="blue-7"
+          icon-right="mdi-content-copy"
+          no-caps
+          outline
+          @click="copyToClipboard(computedNpmCommand)"
         >
-          {{
-            computedNpmCommand
-          }}
+          {{ computedNpmCommand }}
         </q-btn>
 
-        <div class="package-keywords row full-width items-center" v-if="selectedPackage.package?.keywords">
+        <div
+          v-if="selectedPackage.package?.keywords"
+          class="package-keywords row full-width items-center"
+        >
           <q-chip
-              clickable
-              color="grey-7"
-              outline
-              v-close-popup
-              v-for="keyword in selectedPackage.package.keywords"
-              @click="emits('search', keyword)"
+            v-for="keyword in selectedPackage.package.keywords"
+            v-close-popup
+            clickable
+            color="grey-7"
+            outline
+            @click="emits('search', keyword)"
           >
             {{ keyword }}
           </q-chip>
@@ -118,28 +111,26 @@
 </template>
 
 <script setup lang="ts">
-import {copyToClipboard} from "quasar";
-import {computed, onBeforeMount, ref, type Ref} from "vue";
-import type {PackageFromSearch, PackageNpmMetadata} from "@/types";
-import {getPackageNpmEntrypoint, getPackageNpmMetadata} from "@/api/jsdeliverRepo";
+import { copyToClipboard } from 'quasar'
+import { computed, onBeforeMount, ref, type Ref } from 'vue'
+import type { PackageFromSearch, PackageNpmMetadata } from '@/types'
+import { getPackageNpmEntrypoint, getPackageNpmMetadata } from '@/api/jsdeliverRepo'
 
-const selectedPackageMeta: Ref<PackageNpmMetadata | null> = ref(null);
-const selectedPackageEntrypoint = ref("");
+const selectedPackageMeta: Ref<PackageNpmMetadata | null> = ref(null)
+const selectedPackageEntrypoint = ref('')
 
 const props = defineProps<{
-  selectedPackage: PackageFromSearch,
-}>();
+  selectedPackage: PackageFromSearch
+}>()
 
-const emits = defineEmits(['search', 'close']);
+const emits = defineEmits(['search', 'close'])
 
 onBeforeMount(async () => {
-  selectedPackageMeta.value = await getPackageNpmMetadata(
-      props.selectedPackage?.package.name
-  );
+  selectedPackageMeta.value = await getPackageNpmMetadata(props.selectedPackage?.package.name)
   selectedPackageEntrypoint.value = await getPackageNpmEntrypoint(
-      props.selectedPackage?.package.name,
-      props.selectedPackage?.package.version
-  );
+    props.selectedPackage?.package.name,
+    props.selectedPackage?.package.version
+  )
 })
 
 const computedDelivrCDNLink = computed(() => {
@@ -156,7 +147,7 @@ const computedNpmCommand = computed(() => {
 </script>
 
 <style lang="scss">
-@import "@/styles/variables.scss";
+@import '@/styles/variables.scss';
 
 .package-details-modal {
   .package-install-info {

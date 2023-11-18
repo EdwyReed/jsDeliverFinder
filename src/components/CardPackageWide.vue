@@ -10,47 +10,62 @@
           v. {{ npmPackage.package.version }}
         </q-badge>
       </div>
-      <q-space/>
+      <q-space />
       <q-btn-group class="package-links" flat outline color="blue-9">
-        <q-btn :href="npmPackage.package.links.npm" target="_blank" outline text-color="blue-9" dense icon="mdi-npm"/>
-        <q-btn :href="npmPackage.package.links.repository" target="_blank" outline text-color="blue-9" dense
-               icon="mdi-git"/>
-        <q-btn :href="npmPackage.package.links.homepage" target="_blank" outline text-color="blue-9" dense
-               icon="mdi-home"/>
+        <q-btn
+          :href="npmPackage.package.links.npm"
+          dense
+          icon="mdi-npm"
+          outline
+          target="_blank"
+          text-color="blue-9"
+        />
+        <q-btn
+          :href="npmPackage.package.links.repository"
+          dense
+          icon="mdi-git"
+          outline
+          target="_blank"
+          text-color="blue-9"
+        />
+        <q-btn
+          :href="npmPackage.package.links.homepage"
+          dense
+          icon="mdi-home"
+          outline
+          target="_blank"
+          text-color="blue-9"
+        />
       </q-btn-group>
     </div>
     <div class="package-keywords row full-width items-center" v-if="npmPackage.package?.keywords">
       <q-chip
-          clickable
-          color="grey-7"
-          outline
-          v-for="keyword in npmPackage.package.keywords.slice(0, 3)"
-          @click="emits('search', keyword)"
-      >{{ keyword }}
+        v-for="keyword in npmPackage.package.keywords.slice(0, 3)"
+        clickable
+        color="grey-7"
+        outline
+        @click="emits('search', keyword)"
+        >{{ keyword }}
       </q-chip>
-      <q-chip
-          clickable
-          color="grey-7"
-          outline
-          v-if="npmPackage.package.keywords.length > 3"
-      > and {{ npmPackage.package.keywords.length - 3 }} more
+      <q-chip v-if="npmPackage.package.keywords.length > 3" clickable color="grey-7" outline>
+        and {{ npmPackage.package.keywords.length - 3 }} more
       </q-chip>
     </div>
   </q-card>
 </template>
 
 <script setup lang="ts">
-import type {PackageFromSearch} from "@/types";
+import type { PackageFromSearch } from '@/types'
 
-const emits = defineEmits(['search', 'select']);
+const emits = defineEmits(['search', 'select'])
 
 const props = defineProps<{
-  npmPackage: PackageFromSearch,
-}>();
+  npmPackage: PackageFromSearch
+}>()
 </script>
 
 <style lang="scss">
-@import "@/styles/variables.scss";
+@import '@/styles/variables.scss';
 
 .card-package-wide {
   width: 100%;

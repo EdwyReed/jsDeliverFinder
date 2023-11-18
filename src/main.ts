@@ -15,16 +15,16 @@ const app = createApp(App)
 
 app.use(router)
 app.use(Quasar, {
-    config: {
-        brand: {
-            primary: '#0D272Fff',
-            'primary-light': '#E1F4F7ff',
-            secondary: '#0A506Cff',
-            accent: '#1DCAD3ff',
-            'primary-dark': '#122A32ff',
-            light: '#E1F4F7ff',
-        }
+  config: {
+    brand: {
+      primary: '#0D272Fff',
+      'primary-light': '#E1F4F7ff',
+      secondary: '#0A506Cff',
+      accent: '#1DCAD3ff',
+      'primary-dark': '#122A32ff',
+      light: '#E1F4F7ff'
     }
+  }
 })
 
 app.mount('#app')

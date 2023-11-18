@@ -5,7 +5,7 @@ import { RouterView } from 'vue-router'
 <template>
   <q-layout>
     <q-header class="bg-primary row align-center">
-      <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="50" height="50" />
+      <img alt="Service logo" class="logo" height="50" src="@/assets/logo.png" width="50" />
       <h4 class="text-center">DelivrFinder</h4>
     </q-header>
 
@@ -14,14 +14,14 @@ import { RouterView } from 'vue-router'
     </q-page-container>
 
     <q-footer class="bg-primary row align-center">
-      <q-toolbar style="flex-wrap: wrap;">
+      <q-toolbar style="flex-wrap: wrap">
         <q-toolbar-title>Made by Ivan Petylo</q-toolbar-title>
         <q-btn
-            href="https://github.com/EdwyReed/jsDeliverFinder"
-            borderless
-            no-caps
-            flat
-            icon="mdi-github"
+          borderless
+          flat
+          href="https://github.com/EdwyReed/jsDeliverFinder"
+          icon="mdi-github"
+          no-caps
         >
           https://github.com/EdwyReed/jsDeliverFinder
         </q-btn>
@@ -32,9 +32,8 @@ import { RouterView } from 'vue-router'
 
 <style lang="scss">
 .q-header {
-
   .logo {
-    margin: .3rem 1rem .3rem .3rem;
+    margin: 0.3rem 1rem 0.3rem 0.3rem;
   }
 
   h4 {
